@@ -22,13 +22,15 @@ public class Tuyau {
 		return false ;
 	}
 	
-	public void modifier(Direction direction) {
+	public boolean modifier(Direction direction) {
 		Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupere la derniere
 		Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
 		if (laCaseVoulue!=null) {
-			laCaseVoulue.accepteTuyau(this);
+			if(laCaseVoulue.accepteTuyau(this)) return true;
+			return false;
 		} else {
-			System.out.println("On ne peut pas modifier car la case n'existe pas");
+			System.out.println("On ne peut pas modifier car la case n'existe pas ou n'est pas dispo");
+			return false;
 		}
 		
 	}

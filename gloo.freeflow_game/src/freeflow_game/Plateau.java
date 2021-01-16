@@ -103,4 +103,17 @@ public class Plateau {
 		monString+="]";
 		return monString;
 	}
+	
+	public boolean plateauComplet() {
+		for (ArrayList<Case> ligneDuPlateau : this.plateau) {
+			for (Case caseDuPlateau: ligneDuPlateau) {
+				if (!caseDuPlateau.valideFinJeu()) {
+					System.out.println("Le jeu n'est pas fini frr ");
+					return false;
+				}
+			}	
+		}
+		System.out.println("Tas gagné frr");
+		return true;
+	}
 }

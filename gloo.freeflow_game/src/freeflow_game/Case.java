@@ -29,20 +29,23 @@ public class Case {
 		return(caseVoisine);
 	}
 	
-	public void accepteTuyau(Tuyau tuyau) {
+	public boolean accepteTuyau(Tuyau tuyau) {
 		if (this.monPlot == null && this.monTuyau == null) {
 			System.out.println("la case accepte le tuyau car vide");
 			setTuyau(tuyau);
 			monTuyau.ajouterCase(this);
+			return true;
 		} else if (this.monPlot!=null && this.monPlot.accepteTuyau(tuyau)) {
 			System.out.println("la case accepte le tuyau car le tuyau est de la bonne couleur");
 			setTuyau(tuyau); //là on finit une chemin plot - tuyau -plot donc a voir 
 			monTuyau.ajouterCase(this);
+			return true;
 		}else {
 			for ( Case caseDuTuyau : tuyau.caseTraverseesParTuyau) {
 				caseDuTuyau.setTuyau(null);
 			}
 			tuyau = null; // on detruit le tuyau 
+			return false;
 		}
 	}
 	
@@ -58,13 +61,17 @@ public class Case {
 	}
 	
 	public boolean valideFinJeu() {
-		if (this.monTuyau != null || this.monPlot != null) {
+		if (this.monPlot != null && this.monPlot != null) {
+			//Si il y a un plot, pour que le jeu soit fini il faut qu'il y ai aussi un tuyau dessus 
 			return true;
-		}
-		return false;
+		} else if (this.monPlot==null && this.monTuyau!=null) {
+			//si il n'y a pas de plot sur la case, on a juste besoin d'un tuyau 
+			return true;
+		} else return false;
+		
 	}
 	public void setPlot(Plot lePlot) {
 		this.monPlot= lePlot;
-	}
+	} 
 	
 }

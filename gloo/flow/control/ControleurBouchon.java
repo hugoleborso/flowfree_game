@@ -67,21 +67,27 @@ public class ControleurBouchon implements IControleur {
         if (plateau.getPlot(ligne,colonne)==null) return false;
         
         tuyauCourant = plateau.getPlot(ligne, colonne).nouveauTuyau();
+        switch(tuyauCourant.getCouleur()) {
+	    case ROUGE  -> directionsTuyauRouge  = new ArrayList<>();
+	    case ORANGE -> directionsTuyauOrange = new ArrayList<>();
+	    case BLEU   -> directionsTuyauBleu   = new ArrayList<>();
+	    case VERT   -> directionsTuyauVert   = new ArrayList<>();
+	    case JAUNE  -> directionsTuyauJaune  = new ArrayList<>();
+    }
         return true;
     }
 
     @Override
     public boolean action( Direction direction ) {
         System.out.println("flèche " + direction.name());
-        tuyauCourant.modifier(direction);
-        
-        switch(tuyauCourant.getCouleur()) {
-		    case ROUGE  -> directionsTuyauRouge.add(direction) ;
-		    case ORANGE -> directionsTuyauOrange.add(direction) ;
-		    case BLEU   -> directionsTuyauBleu.add(direction) ;
-		    case VERT   -> directionsTuyauVert.add(direction) ;
-		    case JAUNE  -> directionsTuyauJaune.add(direction) ;
-        }
+        if (tuyauCourant.modifier(direction))        
+	        switch(tuyauCourant.getCouleur()) {
+			    case ROUGE  -> directionsTuyauRouge.add(direction) ;
+			    case ORANGE -> directionsTuyauOrange.add(direction) ;
+			    case BLEU   -> directionsTuyauBleu.add(direction) ;
+			    case VERT   -> directionsTuyauVert.add(direction) ;
+			    case JAUNE  -> directionsTuyauJaune.add(direction) ;
+	        }
         return false;
     }
 

@@ -10,13 +10,16 @@ public class Plot {
 	}
 	public boolean accepteTuyau(Tuyau tuyau) {
 		if (tuyau.getCouleur() == maCouleur.getCouleur()) {
+			System.out.println(" plot accepte le tuyau");
 			return true;
 		}
+		System.out.println("plot refuse le tuyau");
 		return false; 
 	}
 	
-	public void nouveauTuyau() {
-		this.maCouleur.nouveauTuyau(this.maCase);
+	public Tuyau nouveauTuyau() {
+		System.out.println("création tuyau");
+		return this.maCouleur.nouveauTuyau(this.maCase);
 	}
 	
 	public Couleur getCouleur() {

@@ -39,18 +39,21 @@ public class Plateau {
 			if (positionCase[0] >0) {
 				return this.plateau.get(positionCase[0]-1).get(positionCase[1]);
 			} else {
+				System.out.println("On sort du plateau !!");
 				return null;
 			} 
 		} else if(direction.getDirection()==Direction.BAS) {
 			if (positionCase[0] < this.nbColonnes-1) {
 				return this.plateau.get(positionCase[0]+1).get(positionCase[1]);
 			} else {
+				System.out.println("On sort du plateau !!");
 				return null;
 			} 
 		} else if(direction.getDirection()==Direction.GAUCHE) {
 			if (positionCase[1] >0) {
 				return this.plateau.get(positionCase[0]).get(positionCase[1]-1);
 			} else {
+				System.out.println("On sort du plateau !!");
 				return null;
 			} 
 		} else {
@@ -58,6 +61,7 @@ public class Plateau {
 			if (positionCase[1] < this.nbColonnes-1) {
 				return this.plateau.get(positionCase[0]).get(positionCase[1]+1);
 			} else {
+				System.out.println("On sort du plateau !!");
 				return null; 
 			} 
 		}

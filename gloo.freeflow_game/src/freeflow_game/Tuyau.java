@@ -25,10 +25,21 @@ public class Tuyau {
 	public void modifier(Direction direction) {
 		Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupere la derniere
 		Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
-		laCaseVoulue.accepteTuyau(this);
+		if (laCaseVoulue!=null) {
+			laCaseVoulue.accepteTuyau(this);
+		} else {
+			System.out.println("On ne peut pas modifier car la case n'existe pas");
+		}
+		
 	}
 	
 	public void ajouterCase(Case laCase) {
-		this.caseTraverseesParTuyau.add(laCase);
+		if (!this.caseTraverseesParTuyau.contains(laCase)) {
+			System.out.println("case ajoutée au tuyau");
+			this.caseTraverseesParTuyau.add(laCase);
+		} else {
+			System.out.println("case non ajoutée car elle etait déjà dedans ");
+		}
+		
 	}
 }

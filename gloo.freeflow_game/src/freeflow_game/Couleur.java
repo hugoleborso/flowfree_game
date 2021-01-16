@@ -8,6 +8,7 @@ public enum Couleur {
 	ORANGE;
 	
 	public Tuyau nouveauTuyau(Case laCase) {
+		System.out.println("La couleur" +this.name()+" créé le nouveau tuyau");
 		return (new Tuyau( valueOf(this.name()), laCase));
 	}
 	

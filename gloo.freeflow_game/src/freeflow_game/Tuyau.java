@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Tuyau {
 	protected Couleur maCouleur;
-	protected ArrayList<Case> caseTraverséesParTuyau= new ArrayList<>();
+	protected ArrayList<Case> caseTraverseesParTuyau= new ArrayList<>();
 	
-	public Tuyau(Couleur maCouleur, Case premièreCase) {
+	public Tuyau(Couleur maCouleur, Case premiereCase) {
 		this.maCouleur=maCouleur;
-		caseTraverséesParTuyau.add(premièreCase);
+		caseTraverseesParTuyau.add(premiereCase);
 	}
 	
 	public 	Couleur getCouleur() {
@@ -16,19 +16,19 @@ public class Tuyau {
 	}
 	
 	public boolean estDansTuyau(Case laCase) {
-		if (this.caseTraverséesParTuyau.contains(laCase)) {
+		if (this.caseTraverseesParTuyau.contains(laCase)) {
 			return true;
 		}
 		return false ;
 	}
 	
 	public void modifier(Direction direction) {
-		Case laDernièreCase = (Case) this.caseTraverséesParTuyau.get(this.caseTraverséesParTuyau.size()-1);//on récupère la dernière
-		Case laCaseVoulue = laDernièreCase.getCaseVoisine(direction);
+		Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupÃ¨re la derniÃ¨re
+		Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
 		laCaseVoulue.accepteTuyau(this);
 	}
 	
 	public void ajouterCase(Case laCase) {
-		this.caseTraverséesParTuyau.add(laCase);
+		this.caseTraverseesParTuyau.add(laCase);
 	}
 }

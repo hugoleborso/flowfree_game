@@ -23,7 +23,7 @@ public class Tuyau {
 	}
 	
 	public void modifier(Direction direction) {
-		Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupère la dernière
+		Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupere la derniere
 		Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
 		laCaseVoulue.accepteTuyau(this);
 	}

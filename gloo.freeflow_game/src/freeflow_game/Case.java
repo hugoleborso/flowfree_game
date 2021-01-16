@@ -14,7 +14,7 @@ public class Case {
 	public Plot getPlot() {
 		return(this.monPlot);
 	}
-	//nécessaire pour l'affichage mnt mais a supprimer après 
+	//necessaire pour l'affichage mnt mais a supprimer apres 
 	public Tuyau getTuyau() {
 		return this.monTuyau;
 	}
@@ -33,7 +33,7 @@ public class Case {
 			setTuyau(tuyau); //là on finit une chemin plot - tuyau -plot donc a voir 
 			tuyau.ajouterCase(this);
 		}else {
-			tuyau = null; // on détruit le tuyau 
+			tuyau = null; // on detruit le tuyau 
 		}
 	}
 	

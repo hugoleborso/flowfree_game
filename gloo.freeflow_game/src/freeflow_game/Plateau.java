@@ -14,11 +14,12 @@ public class Plateau {
 		for (int i = 0; i<nbLignes ; i++) {
 			this.plateau.add(new ArrayList<Case>(nbColonnes));
 			for (int j = 0; j <nbColonnes; j++) {
-				System.out.println(new int[] {i,j});
-				if (arrayPositionPlot.contains(new int[]{i,j})) {
-					System.out.print("ça marche frero");
-					int positionDansListe = arrayPositionPlot.indexOf(new int[] {i,j});
-					this.plateau.get(i).add(new Case(new Plot(arrayCouleurs.get(positionDansListe)),null,this));
+				if (arrayPositionPlot.contains(new Position(i,j))) {
+					int positionDansListe = arrayPositionPlot.indexOf(new Position(i,j));
+					this.plateau.get(i).add(new Case(null,null,this));
+					//On récupère la case où on doit mettre le plot pour initialiser le plot
+					Case casePourPlot = this.plateau.get(i).get(j);
+					casePourPlot.setPlot(new Plot(arrayCouleurs.get(positionDansListe),casePourPlot));
 				} else {
 					this.plateau.get(i).add(new Case(null,null,this));
 				}
@@ -88,9 +89,9 @@ public class Plateau {
 				if (plateau.get(i).get(j).getPlot()==null && plateau.get(i).get(j).getTuyau()==null) {
 					monString+=",N";
 				} else if(plateau.get(i).get(j).getPlot()!=null) {
-					monString+="P("+plateau.get(i).get(j).getPlot().maCouleur+"),";
+					monString+=",P("+plateau.get(i).get(j).getPlot().maCouleur+"),";
 				} else if(plateau.get(i).get(j).getTuyau()!=null) {
-					monString+="T("+plateau.get(i).get(j).getTuyau().maCouleur+"),";
+					monString+=",T("+plateau.get(i).get(j).getTuyau().maCouleur+"),";
 				}
 			}
 			monString+="]";

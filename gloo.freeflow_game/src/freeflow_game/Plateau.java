@@ -7,7 +7,7 @@ public class Plateau {
 	protected int nbColonnes;
 	protected ArrayList<ArrayList<Case>> plateau;
 	
-	public Plateau(int nbLignes, int nbColonnes, ArrayList<int[]> arrayPositionPlot,ArrayList<Couleur> arrayCouleurs) {
+	public Plateau(int nbLignes, int nbColonnes, ArrayList<Position> arrayPositionPlot,ArrayList<Couleur> arrayCouleurs) {
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
 		this.plateau = new ArrayList<>(nbLignes);

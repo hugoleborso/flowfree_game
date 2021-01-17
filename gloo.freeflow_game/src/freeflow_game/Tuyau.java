@@ -24,20 +24,20 @@ public class Tuyau {
 		return false ;
 	}
 	
-	public boolean modifier(Direction direction) {
+	public boolean[] modifier(Direction direction) {
 		if (this.isFinis) {
 			System.out.println("on ne peut plus avancer car on a déjà atteitn le plot sorry bro");
-			return false;
+			return new boolean[]{false,false};
 		}
 		else {
 			Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupere la derniere
 			Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
 			if (laCaseVoulue!=null) {
-				if(laCaseVoulue.accepteTuyau(this)) return true;
-				return false;
+				if(laCaseVoulue.accepteTuyau(this)) return new boolean[]{true,false};
+				return new boolean[]{false,true};
 			} else {
 				System.out.println("On ne peut pas modifier car la case n'existe pas ou n'est pas dispo");
-				return false;
+				return new boolean[]{false,false};
 			}
 		}	
 	}

@@ -43,27 +43,28 @@ public class Tuyau {
 	}
 	
 	public void ajouterCase(Case laCase, boolean isPlotOnCase) {
-		if (!this.caseTraverseesParTuyau.contains(laCase)) {
-			if (isPlotOnCase) {
-				System.out.println("case ajoutée au tuyau et tuyau fini");
-				this.caseTraverseesParTuyau.add(laCase);
-				this.isFinis=true;
-			}
-			else {
-				System.out.println("case ajoutée au tuyau");
-				this.caseTraverseesParTuyau.add(laCase);
-			}
-			
-		} else {
-			System.out.println("case non ajoutée car elle etait déjà dedans ");
+		if (isPlotOnCase) {
+			System.out.println("case ajoutée au tuyau et tuyau fini");
+			this.caseTraverseesParTuyau.add(laCase);
+			setIsFinis(true);
 		}
-		
+		else {
+			System.out.println("case ajoutée au tuyau");
+			this.caseTraverseesParTuyau.add(laCase);
+		}
+			
 	}
+		
+	
 	
 	public void deleteTuyauContent() {
 		System.out.println("ERRRRURRRRR");
 		for ( Case caseDuTuyau : this.caseTraverseesParTuyau) {
 			caseDuTuyau.setTuyau(null);
 		}
+	}
+	
+	private void setIsFinis(boolean isFinis) {
+		this.isFinis=isFinis;
 	}
 }

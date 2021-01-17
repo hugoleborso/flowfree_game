@@ -42,11 +42,14 @@ public class Main {
 			tuyauCourant.modifier(Direction.BAS);
 			System.out.print(monPlateau);
 			tuyauCourant.modifier(Direction.DROITE);
+			System.out.print(monPlateau);
+			
+			
 			
 		}
 		Plot plotCliqué2=monPlateau.getPlot(0,1);
-		if (plotCliqué!=null) {
-			Tuyau tuyauCourant = plotCliqué.nouveauTuyau();
+		if (plotCliqué2!=null) {
+			Tuyau tuyauCourant = plotCliqué2.nouveauTuyau();
 			tuyauCourant.modifier(Direction.BAS);
 			System.out.print(monPlateau);
 			tuyauCourant.modifier(Direction.BAS);
@@ -60,8 +63,8 @@ public class Main {
 			
 		}
 		Plot plotCliqué3=monPlateau.getPlot(0,2);
-		if (plotCliqué!=null) {
-			Tuyau tuyauCourant = plotCliqué.nouveauTuyau();
+		if (plotCliqué3!=null) {
+			Tuyau tuyauCourant = plotCliqué3.nouveauTuyau();
 			tuyauCourant.modifier(Direction.DROITE);
 			System.out.print(monPlateau);
 			tuyauCourant.modifier(Direction.BAS);
@@ -78,18 +81,23 @@ public class Main {
 			
 			
 		}
+		monPlateau.plateauComplet();
 		Plot plotCliqué4=monPlateau.getPlot(0,4);
-		if (plotCliqué!=null) {
-			Tuyau tuyauCourant = plotCliqué.nouveauTuyau();
+		if (plotCliqué4!=null) {
+			Tuyau tuyauCourant = plotCliqué4.nouveauTuyau();
 			tuyauCourant.modifier(Direction.BAS);
 			System.out.print(monPlateau);
 			tuyauCourant.modifier(Direction.BAS);
 			System.out.print(monPlateau);
 			tuyauCourant.modifier(Direction.BAS);
 			System.out.print(monPlateau);
+			tuyauCourant.modifier(Direction.BAS);
 			tuyauCourant.modifier(Direction.BAS);
 			
+			
 		}
+		System.out.print(monPlateau);
+		monPlateau.plateauComplet();
 		System.out.print(monPlateau);
 	}
 

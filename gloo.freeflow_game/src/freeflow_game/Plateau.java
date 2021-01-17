@@ -43,7 +43,7 @@ public class Plateau {
 				return null;
 			} 
 		} else if(direction.getDirection()==Direction.BAS) {
-			if (positionCase[0] < this.nbColonnes-1) {
+			if (positionCase[0] < this.nbLignes-1) {
 				return this.plateau.get(positionCase[0]+1).get(positionCase[1]);
 			} else {
 				System.out.println("On sort du plateau !!");
@@ -90,13 +90,13 @@ public class Plateau {
 		for (int i =0; i<nbLignes;i++) {
 			monString=monString+"[";
 			for (int j =0; j<nbColonnes;j++) {
-				if (plateau.get(i).get(j).getPlot()==null && plateau.get(i).get(j).getTuyau()==null) {
+				if (plateau.get(i).get(j).getPlot("Impression")==null && plateau.get(i).get(j).getTuyau()==null) {
 					monString+=",N";
-				} else if(plateau.get(i).get(j).getPlot()!=null) {
-					monString+=",P("+plateau.get(i).get(j).getPlot().maCouleur+"),";
 				} else if(plateau.get(i).get(j).getTuyau()!=null) {
 					monString+=",T("+plateau.get(i).get(j).getTuyau().maCouleur+"),";
-				}
+				}else if(plateau.get(i).get(j).getPlot("Impression")!=null) {
+					monString+=",P("+plateau.get(i).get(j).getPlot("Impression").maCouleur+"),";
+				} 
 			}
 			monString+="]";
 		}

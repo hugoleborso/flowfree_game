@@ -12,12 +12,31 @@ public class Case {
 	}
 	
 	public Plot getPlot() {
-		if (this.monPlot!=null) return(this.monPlot);
+		if (this.monPlot!=null) {
+			if (this.monTuyau!=null) {
+				//la personne a recliqué sur un plot où elle avait déjà créé un tuyau, on le supprime
+			
+				this.monTuyau.deleteTuyauContent();
+				this.monTuyau=null; //on détruit le tuyau 	
+			}
+			return(this.monPlot);//on retourne le plot dans les deux cas 
+		}
 		else {
 			//System.out.println("PAS DE PLOT SELECTIONNE");
-			return null;//à changer pour une errue maybe
+			return null;//à changer pour une erreur maybe
 		}
 	}
+	//nécessaire pour l'affichage à supprimer apres 
+	public Plot getPlot(String impression) {
+		if (this.monPlot!=null) {
+			return(this.monPlot);//on retourne le plot dans les deux cas 
+		}
+		else {
+			//System.out.println("PAS DE PLOT SELECTIONNE");
+			return null;//à changer pour une erreur maybe
+		}
+	}
+	///////////////////////////////////////////
 	//necessaire pour l'affichage mnt mais a supprimer apres 
 	public Tuyau getTuyau() {
 		return this.monTuyau;
@@ -33,23 +52,22 @@ public class Case {
 		if (this.monPlot == null && this.monTuyau == null) {
 			System.out.println("la case accepte le tuyau car vide");
 			setTuyau(tuyau);
-			monTuyau.ajouterCase(this);
+			monTuyau.ajouterCase(this,false);
 			return true;
 		} else if (this.monPlot!=null && this.monPlot.accepteTuyau(tuyau)) {
 			System.out.println("la case accepte le tuyau car le tuyau est de la bonne couleur");
-			setTuyau(tuyau); //là on finit une chemin plot - tuyau -plot donc a voir 
-			monTuyau.ajouterCase(this);
+			setTuyau(tuyau); //là on finit une chemin plot - tuyau -plot donc on dit au tuyau qu'il est terminé 
+			monTuyau.ajouterCase(this,true);
 			return true;
 		}else {
-			for ( Case caseDuTuyau : tuyau.caseTraverseesParTuyau) {
-				caseDuTuyau.setTuyau(null);
-			}
-			tuyau = null; // on detruit le tuyau 
+			
+			tuyau.deleteTuyauContent();
+			tuyau=null; //on détruit le tuyau 
 			return false;
 		}
 	}
 	
-	private void setTuyau(Tuyau tuyau) {
+	public void setTuyau(Tuyau tuyau) {
 		if (tuyau!=null) {
 			System.out.println("le tuyau a été ajouté à la case ");
 			this.monTuyau = tuyau; 
@@ -61,13 +79,15 @@ public class Case {
 	}
 	
 	public boolean valideFinJeu() {
-		if (this.monPlot != null && this.monPlot != null) {
-			//Si il y a un plot, pour que le jeu soit fini il faut qu'il y ai aussi un tuyau dessus 
+		if (this.monPlot != null && this.monTuyau != null) {
+			//Si il y a un plot, pour que le jeu soit fini il faut qu'il y ai aussi un tuyau dessus
 			return true;
 		} else if (this.monPlot==null && this.monTuyau!=null) {
 			//si il n'y a pas de plot sur la case, on a juste besoin d'un tuyau 
 			return true;
-		} else return false;
+		} else {
+			return false;
+		}
 		
 	}
 	public void setPlot(Plot lePlot) {

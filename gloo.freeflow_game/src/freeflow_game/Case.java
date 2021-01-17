@@ -54,7 +54,7 @@ public class Case {
 			setTuyau(tuyau);
 			monTuyau.ajouterCase(this,false);
 			return true;
-		} else if (this.monPlot!=null && this.monPlot.accepteTuyau(tuyau)) {
+		} else if (this.monPlot!=null && this.monPlot.accepteTuyau(tuyau) && !tuyau.estDansTuyau(this)) {
 			System.out.println("la case accepte le tuyau car le tuyau est de la bonne couleur");
 			setTuyau(tuyau); //là on finit une chemin plot - tuyau -plot donc on dit au tuyau qu'il est terminé 
 			monTuyau.ajouterCase(this,true);

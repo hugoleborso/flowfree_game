@@ -36,6 +36,7 @@ public class Plateau {
 	public Case getMaCaseVoisine(Case laCase, Direction direction) {
 		int[] positionCase =this.getPosition(laCase);
 		if(direction.getDirection()==Direction.HAUT) {
+			System.out.println("On va vers le haut");
 			if (positionCase[0] >0) {
 				return this.plateau.get(positionCase[0]-1).get(positionCase[1]);
 			} else {
@@ -43,6 +44,7 @@ public class Plateau {
 				return null;
 			} 
 		} else if(direction.getDirection()==Direction.BAS) {
+			System.out.println("On va vers le bas");
 			if (positionCase[0] < this.nbLignes-1) {
 				return this.plateau.get(positionCase[0]+1).get(positionCase[1]);
 			} else {
@@ -50,6 +52,7 @@ public class Plateau {
 				return null;
 			} 
 		} else if(direction.getDirection()==Direction.GAUCHE) {
+			System.out.println("On va vers la gaiche");
 			if (positionCase[1] >0) {
 				return this.plateau.get(positionCase[0]).get(positionCase[1]-1);
 			} else {
@@ -58,6 +61,7 @@ public class Plateau {
 			} 
 		} else {
 			//cas direction = DROITE
+			System.out.println("On va vers la droite");
 			if (positionCase[1] < this.nbColonnes-1) {
 				return this.plateau.get(positionCase[0]).get(positionCase[1]+1);
 			} else {

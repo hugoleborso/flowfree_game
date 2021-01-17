@@ -1,0 +1,123 @@
+@startuml
+title "Free Flow - Diagramme de classes coté métier"
+ 
+class Plateau 
+{
+  #nbLignes : int 
+  #nbColonnes : int
+  #plateau : ArrayList<ArrayList<Case>>
+  +Plateau(int nbLignes, int nbColonnes, ArrayList<Position> arrayPositionPlot, arrayList<Couleur> arrayCouleurs)
+  +getCase(int ligne, int colonne) : Case
+  +getPlot(int ligne, int colonne): Plot
+  +getMaCaseVoisine( Case laCase, Direction direction): Case
+  -getPosition(Case laCase): int[]
+  +plateauComplet() :boolean
+  + setTuyau(Tuyau tuyau) : void
+  
+}
+class Case
+{
+  #monPlot: Plot = null
+  #monTuyau : Tuyau = null
+  #Plateau monPlateau
+  +Case(Plot monPlot, Tuyau monTuyau, Plateau monPlateau)
+  +getPlot() :Plot 
+  +getCaseVoisine(Direction dir) : Case
+  +accepteTuyau(Tuyau tuyauà : boolean
+  +setTuyau(Tuyau tuyau): void
+  +valideFinJeu() : boolean
+  +setPlot(Plot lePlot): void
+}
+class Plot
+{
+  #maCouleur: Couleur
+  #maCase: Case
+  +Plot(Couleur maCouleur, Case maCase)
+  +accepteTuyau(Tuyau tuyau): boolean
+  +nouveauTuyau() : Tuyau
+  +getCouleur(): Couleur 
+}
+class Tuyau
+{
+  #maCouleur : Couleur
+  #caseTraverseesParTuyau: ArrayList<Case> = ArrayList()
+  #isFinis : boolean = false
+  +Tuyau(Couleur maCouleur, Case premiereCase)
+  +getCouleur() : Couleur
+  +estDansTuyau(Case laCase) : boolean
+  +modifier(Direction direction) : boolean[]
+  +ajouterCase(Case laCase, boolean isPlotOnCase) : void 
+  +deleteTuyauContent() : void
+  -setIsFinis(boolean isFinis): void
+}
+
+enum Couleur
+{
+  ROUGE
+  BLEU
+  ORANGE
+  JAUNE 
+  VERT
+  +nouveauTuyau(Case laCase) : Tuyau
+  +getCouleur() : Couleur 
+ 
+}
+
+enum Direction
+{
+  HAUT
+  BAS
+  GAUCHE
+  DROITE
+  +getDirection() : Direction
+}
+
+class Position
+{
+  #i : int 
+  #j : int 
+  +Position(int i, int j)
+  +equals(Object t2) : boolean
+  +getI() : int
+  +getJ() : int
+
+}
+
+class ControleurBouchon
+{
+  #positionsPlots : ArrayList<Position> = ArrayList<>()
+  #couleursPlots : ArrayList<Couleur> = ArrayList<>()
+  #plateau : Plateau
+  #tuyauCourant : Tuyau
+  #directionsTuyauRouge : ArrayList<Direction> = ArrayList<>()
+  #directionsTuyauOrange : ArrayList<Direction> = ArrayList<>() 
+  #directionsTuyauBleu : ArrayList<Direction> = ArrayList<>()
+  #directionsTuyauVert : ArrayList<Direction> = ArrayList<>()
+  #directionsTuyauJaune : ArrayList<Direction> = ArrayList<>()
+  #plotChoisiRouge : int[] = [0,0]
+  #plotChoisiOrange : int[] = [0,0]
+  #plotChoisiBleu : int[] = [0,0]
+  #plotChoisiVert : int[] = [0,0]
+  #plotChoisiJaune : int[] = [0,0]
+  +ControleurBouchon()
+  +selectionCase(int ligne, int colonne) : boolean
+  -notePlotChoisi(Couleur couleur, int ligne, int colonne)
+  +action(Direction direction) : boolean
+  +destructionTuyau() : void
+  +getNbLignes() : int 
+  +getNbColonnes() : int
+  +getPositionDepartTuyau(Couleur couleur) : int[]
+  +getPositionSecondPlot(Couleur couleur) : int[]
+  +getDirections(Couleur couleur) : ArrayList<Direction>
+  +getPositionPlotChoisi(Couleur couleur) : int[]
+}
+ 
+ControleurBouchon "1" -- "1" Plateau
+Plateau "1..*"*--"1"  Case
+Case "0..1" o-- "1" Plot
+ControleurBouchon -- "tuyauCourant 0..1" Tuyau
+Case "1.." o-- "0..1" Tuyau
+Couleur "2" -- "1" Plot
+Couleur "1" -- "1" Tuyau
+Position "1" -- "1" Case
+@enduml

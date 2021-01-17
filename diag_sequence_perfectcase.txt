@@ -1,0 +1,24 @@
+@startuml
+title "Free Flow - Diagramme de Séquence - Scénario parfait(vue utilisateur) "
+actor Utilisateur
+boundary IHM
+
+loop nbPlot//2-1
+  Utilisateur -> IHM : clique sur un plot sans tuyau 
+  IHM -> Utilisateur :entoure le plot et redonne la main 
+  loop longueur nécessaire tuyau 
+  Utilisateur -> IHM : demande un déplacement valide
+  IHM -> Utilisateur : créé le tuyau et redonne la main 
+  end
+  Utilisateur -> IHM : demande un déplacement sur le plot de la bonne couleur
+  IHM -> Utilisateur : redonne la main 
+end 
+Utilisateur -> IHM : clique sur un plot sans tuyau 
+  IHM -> Utilisateur :entoure le plot et redonne la main 
+  loop longueur necessaire tuyau
+  Utilisateur -> IHM : demande un déplacement valide
+  IHM -> Utilisateur : créé le tuyau et redonne la main 
+  end
+  Utilisateur -> IHM : demande un déplacement sur le plot de la bonne couleur
+  IHM -> Utilisateur : Affiche le message de victoire
+@enduml

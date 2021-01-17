@@ -15,7 +15,12 @@ public class Position {
 		}
 	}
 	
-	
+	public int getI() {
+		return this.i;
+	}
+	public int getJ() {
+		return this.j;
+	}
 	public String toString(){
 		return ("("+this.i+", "+this.j+")");
 	}

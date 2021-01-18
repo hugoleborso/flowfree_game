@@ -7,12 +7,10 @@ class Plateau
   #nbColonnes : int
   #plateau : ArrayList<ArrayList<Case>>
   +Plateau(int nbLignes, int nbColonnes, ArrayList<Position> arrayPositionPlot, arrayList<Couleur> arrayCouleurs)
-  +getCase(int ligne, int colonne) : Case
   +getPlot(int ligne, int colonne): Plot
   +getMaCaseVoisine( Case laCase, Direction direction): Case
-  -getPosition(Case laCase): int[]
+  -getPosition(Case laCase): Position
   +plateauComplet() :boolean
-  + setTuyau(Tuyau tuyau) : void
   
 }
 class Case
@@ -23,7 +21,7 @@ class Case
   +Case(Plot monPlot, Tuyau monTuyau, Plateau monPlateau)
   +getPlot() :Plot 
   +getCaseVoisine(Direction dir) : Case
-  +accepteTuyau(Tuyau tuyauà : boolean
+  +accepteTuyau(Tuyau tuyau) : boolean
   +setTuyau(Tuyau tuyau): void
   +valideFinJeu() : boolean
   +setPlot(Plot lePlot): void

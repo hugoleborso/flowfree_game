@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Tuyau {
 	protected Couleur maCouleur;
-	protected ArrayList<Case> caseTraverséesParTuyau= new ArrayList<>();
+	protected ArrayList<Case> caseTraverseesParTuyau= new ArrayList<>();
+	protected boolean isFinis =false; 
 	
-	public Tuyau(Couleur maCouleur, Case premièreCase) {
+	public Tuyau(Couleur maCouleur, Case premiereCase) {
 		this.maCouleur=maCouleur;
-		caseTraverséesParTuyau.add(premièreCase);
+		caseTraverseesParTuyau.add(premiereCase);
+		premiereCase.monTuyau=this;
 	}
 	
 	public 	Couleur getCouleur() {
@@ -16,19 +18,53 @@ public class Tuyau {
 	}
 	
 	public boolean estDansTuyau(Case laCase) {
-		if (this.caseTraverséesParTuyau.contains(laCase)) {
+		if (this.caseTraverseesParTuyau.contains(laCase)) {
 			return true;
 		}
 		return false ;
 	}
 	
-	public void modifier(Direction direction) {
-		Case laDernièreCase = (Case) this.caseTraverséesParTuyau.get(this.caseTraverséesParTuyau.size()-1);//on récupère la dernière
-		Case laCaseVoulue = laDernièreCase.getCaseVoisine(direction);
-		laCaseVoulue.accepteTuyau(this);
+	public boolean[] modifier(Direction direction) {
+		if (this.isFinis) {
+			System.out.println("on ne peut plus avancer car on a déjà atteitn le plot sorry bro");
+			return new boolean[]{false,false};
+		}
+		else {
+			Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupere la derniere
+			Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
+			if (laCaseVoulue!=null) {
+				if(laCaseVoulue.accepteTuyau(this)) return new boolean[]{true,false};
+				return new boolean[]{false,true};
+			} else {
+				System.out.println("On ne peut pas modifier car la case n'existe pas ou n'est pas dispo");
+				return new boolean[]{false,false};
+			}
+		}	
 	}
 	
-	public void ajouterCase(Case laCase) {
-		this.caseTraverséesParTuyau.add(laCase);
+	public void ajouterCase(Case laCase, boolean isPlotOnCase) {
+		if (isPlotOnCase) {
+			System.out.println("case ajoutée au tuyau et tuyau fini");
+			this.caseTraverseesParTuyau.add(laCase);
+			setIsFinis(true);
+		}
+		else {
+			System.out.println("case ajoutée au tuyau");
+			this.caseTraverseesParTuyau.add(laCase);
+		}
+			
+	}
+		
+	
+	
+	public void deleteTuyauContent() {
+		System.out.println("ERRRRURRRRR");
+		for ( Case caseDuTuyau : this.caseTraverseesParTuyau) {
+			caseDuTuyau.setTuyau(null);
+		}
+	}
+	
+	private void setIsFinis(boolean isFinis) {
+		this.isFinis=isFinis;
 	}
 }

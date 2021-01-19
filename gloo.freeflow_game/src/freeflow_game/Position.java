@@ -1,18 +1,32 @@
 package freeflow_game;
 
 public class Position {
-	protected int[] tableau;
+	protected int i;
+	protected int j;
 	public Position(int i, int j) {
-		this.tableau= new int[] {i,j};
+		this.i= i;
+		this.j = j;
 	}
-	public boolean equals (Position t1, Position t2) {
-		if (t1.tableau[0]==t2.tableau[0] && t1.tableau[1]==t2.tableau[1]) {
-			return true;
+	public boolean equals ( Object t2) {
+		if (!(t2 instanceof Position)) return false;
+		else {
+			Position t2Position= (Position) t2;
+			return this.i == t2Position.i && this.j==t2Position.j;
 		}
-		return false;
+	}
+	public int hashCode() {
+		//On donne un identifiant unique à chaque position 
+		return ((this.j-1)*Plateau.TAILLE+(i-1));
 	}
 	
+	public int getI() {
+		return this.i;
+	}
+	public int getJ() {
+		return this.j;
+	}
+	// Méthode uniquement utilisées pour l'affichage lors des test, elle serait supprimée en prod
 	public String toString(){
-		return ("i: "+this.tableau[0]+"j: "+this.tableau[1]);
+		return ("("+this.i+", "+this.j+")");
 	}
 }

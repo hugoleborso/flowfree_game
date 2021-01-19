@@ -14,6 +14,10 @@ public class Position {
 			return this.i == t2Position.i && this.j==t2Position.j;
 		}
 	}
+	public int hashCode() {
+		//On donne un identifiant unique à chaque position 
+		return ((this.j-1)*Plateau.TAILLE+(i-1));
+	}
 	
 	public int getI() {
 		return this.i;
@@ -21,6 +25,7 @@ public class Position {
 	public int getJ() {
 		return this.j;
 	}
+	// Méthode uniquement utilisées pour l'affichage lors des test, elle serait supprimée en prod
 	public String toString(){
 		return ("("+this.i+", "+this.j+")");
 	}

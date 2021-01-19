@@ -3,12 +3,13 @@ package freeflow_game;
 public class Case {
 	protected Plot monPlot=null;
 	protected Tuyau monTuyau=null;
-	protected Plateau monPlateau;
+	protected static Plateau lePlateau=null;
 	
 	public Case(Plot monPlot, Tuyau monTuyau, Plateau monPlateau) {
 		this.monPlot = monPlot;
 		this.monTuyau = monTuyau;
-		this.monPlateau=monPlateau;
+		if(lePlateau==null) lePlateau=monPlateau; // on initialise le plateau une seule fois vu que la variable
+												  //sera partagée par toutes les cases
 	}
 	
 	public Plot getPlot() {
@@ -26,25 +27,25 @@ public class Case {
 			return null;//à changer pour une erreur maybe
 		}
 	}
-	//nécessaire pour l'affichage à supprimer apres 
+	//nécessaire pour l'affichage à supprimer en prod
 	public Plot getPlot(String impression) {
 		if (this.monPlot!=null) {
 			return(this.monPlot);//on retourne le plot dans les deux cas 
 		}
 		else {
 			//System.out.println("PAS DE PLOT SELECTIONNE");
-			return null;//à changer pour une erreur maybe
+			return null;
 		}
 	}
 	///////////////////////////////////////////
-	//necessaire pour l'affichage mnt mais a supprimer apres 
+	//necessaire pour l'affichage des test, à supprimer ne prod  
 	public Tuyau getTuyau() {
 		return this.monTuyau;
 	}
 	//////////////////////////////////////////////////////////
 	
 	public Case getCaseVoisine(Direction dir) {
-		Case caseVoisine = monPlateau.getMaCaseVoisine(this,dir);
+		Case caseVoisine = lePlateau.getMaCaseVoisine(this,dir);
 		return(caseVoisine);
 	}
 	

@@ -1,0 +1,24 @@
+@startuml
+title "Free Flow - Diagramme de Séquence - Scénario Tentative Chevauchement Tuyau 2 Sur Tuyau 1(vue utilisateur) "
+actor Utilisateur
+boundary IHM
+ group construction tuyau 1
+  Utilisateur -> IHM : clique sur un plot sans tuyau 
+  IHM -> Utilisateur :entoure le plot et redonne la main 
+loop longueur nécessaire tuyau 1 
+  Utilisateur -> IHM : demande un déplacement valide
+  IHM -> Utilisateur : dessine le tuyau et redonne la main 
+  end
+  Utilisateur -> IHM : demande un déplacement sur le plot de la bonne couleur
+  IHM -> Utilisateur : redonne la main
+ end
+ group construction tuyau 2
+  Utilisateur -> IHM : clique sur un plot sans tuyau 
+  IHM -> Utilisateur :entoure le plot et redonne la main 
+  loop longueur tuyau jusqu'au chevauchement
+  Utilisateur -> IHM : demande un déplacement valide
+  IHM -> Utilisateur : dessine le tuyau et redonne la main 
+  end
+  Utilisateur -> IHM : demande de cheauchement 
+  IHM -> Utilisateur : efface le tuyau courant et redonne la main
+@enduml

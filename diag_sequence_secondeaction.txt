@@ -1,0 +1,20 @@
+@startuml
+title "Free Flow - Diagramme de Séquence - Deuxième Action : Rajout tuyau case valide"
+actor Utilisateur
+boundary IHM
+Utilisateur -> IHM : Clique sur la flèche du BAS
+IHM -> Controleur :action(BAS) 
+Controleur -> "t_rouge:Tuyau" : modifier(BAS)
+"t_rouge:Tuyau" -> "t_rouge:Tuyau" : récupération de la dernière case du tuyau : l0c0
+"t_rouge:Tuyau" -> "l0c0:Case" :getCaseVoisine(BAS)
+"l0c0:Case" -> Plateau : getMaCaseVoisine(l0c0,BAS)
+Plateau --> "t_rouge:Tuyau" :l1c0(Case)
+"t_rouge:Tuyau" -> "l1c0:Case" : accepteTuyau(t_rouge)
+"l1c0:Case" -> "l1c0:Case" : setTuyau(t_rouge)
+"l1c0:Case" -> "t_rouge:Tuyau" : ajouterCase(l1c0, false)
+"t_rouge:Tuyau"->"t_rouge:Tuyau" : ajout de la case à la fin de caseTraverseesParTuyau
+"l1c0:Case"-->"t_rouge:Tuyau" : true
+"t_rouge:Tuyau" --> Controleur : [true,false]
+Controleur -> IHM : à l'écoute d'une nouvelle chose à faire 
+IHM -> Utilisateur : affichage du premier bout de tuyau
+@enduml

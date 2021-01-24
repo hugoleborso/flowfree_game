@@ -1,0 +1,146 @@
+@startuml
+title "Free Flow - Diagramme de classes coté Utilisateur"
+
+package control {
+class Controleur
+{
+  #plateau : Plateau
+  #tuyauCourant : Tuyau
+  #niveauActuel : Niveau
+  #statistiques : Statistiques
+  #plotCourant : Plot 
+  +Controleur()
+  +selectionCase(int ligne, int colonne) : boolean
+  +action(Direction direction) : boolean
+  -notePlotChoisi(Couleur couleur, int ligne, int colonne) : void
+  +destructionTuyau() : void
+  +getNbLignes() : int 
+  +getNbColonnes() : int
+  +getPositionPremierPlot(Couleur couleur) : int[]
+  +getPositionSecondPlot(Couleur couleur) : int[]
+  +getDirections(Couleur couleur) : ArrayList<Direction>
+  +getPositionPlotChoisi(Couleur couleur) : int[]
+  +getStatistiques() : Statistiques 
+}
+Interface "<<Interface>> Icontroleur"{
+  selectionCase(int ligne, int colonne) : boolean
+  action(Direction direction) : boolean
+  getNbLignes() : int 
+  getNbColonnes() : int 
+  getPositionPremierPlot(Couleur couleur) : int[]
+  getPositionSecondePlot(Couleur couleur) : int[]
+  getDirections(Couleur couleur) : ArrayList<Direction>
+  getPositionPlotChoisi(Couleur couleur) : int[]
+  getStatistiques() : Statistiques 
+}
+}
+
+package hmi {
+class Fenetre {
+  +{static} COTE_FENETRE : int = 500
+  -{static} HAUTEUR_BARRE_FENETRE : int = 20
+  +{static} HAUTEUR_ZONE_TEXTE : int = 40
+  -controleur : Icontroleur
+  +Fenetre(Icontroleur controleur)
+  +keyTyped(KeyEvent e) :void 
+  +keyPressed(KeyEvent e) : void
+  +keyReleased(KeyEvent e) : void
+  +{static} getHauteurZoneTexte() : int 
+  +{static} getTailleCoteFenetre() : int 
+}
+class Panneau{
+  -{static} EPAISSEUR : float =4
+  -premierAffichage : boolean = true 
+  -controleur : Icontroleur
+  -nbLignes : int 
+  -nbColonnes : int
+  -coteCase : int
+  -diametrePlot : int
+  -demiRayon : int
+  -largeurTuyau : int
+  -arcRoundRect : int
+  -selection : int[] 
+  -premierClicPlot : boolean = false
+  +Panneau(Icontroler controleur)
+  -calculeParametres() : void
+  +paint(Graphics g) : void 
+  -paintCasesDirections(Graphics g, int[] posDepartTuyau, ArrayList<Direction> directions, int hauteurZoneTexte, Couleur couleur )
+  -decorationPlot(Graphics g, int[] posDepart, int coteCase, int demiRayon, float epaisseur2, int diametrePlot, int hauteurZoneTexte) : void
+  -paintDirections(Graphics g, int[] posDepart, Arraylist<Direction> directions, int hauteurZoneTexte) : void 
+  -setCouleurGraphique(Graphics g, Couleur c) : void
+  -setCouleurGraphiquePlusClaire(Graphics g, couleur c) : void
+  -afficheScore(Graphics g, int compteurActions, int compteurTuyauxFinis, int nbTuyauxControleur, int compteurCases, int nbCasesControleur) :void 
+  +brighten(Color color) : Color
+  +mouseClicked(MouseEvent e) : void 
+  +mousePressed(MouseEvent e) : void
+  +mouseReleased(MouseEvent e) : void
+  +mouseEntered(MouseEvent e) : void
+  +mouseExited(MouseEvent e) : void
+
+}
+}
+
+package game  {
+class Statistiques {
+  #nbTuyauxFinal : int 
+  #nbCasesGrille : int 
+  #nbLignes : int 
+  #nbCoonnes : int 
+  #compteurActions : int 
+  #compteurTuyauxFinis : int 
+  #compteurCasesRemplies : int 
+  +Statistiques(Niveau niveauJeu)
+  +getNbTuyauxFinal() : int 
+  +getNbCasesGrille() : int 
+  +getNbLignes() : int 
+  +getNbColonnes() : int 
+  +getNbActions() : int 
+  +addAction() : void 
+  +getNbTuyauxFinis() : int 
+  +addTuyauFini() : void 
+  +removeTuyauFini() : void
+  +refreshCompteurCasesRemplies() : void
+  +getNbCasesRemplies() : void 
+}
+class Game {
+  +{static} main(String[] args) : void
+  +run() : void
+}
+
+}
+
+
+
+
+
+
+
+
+Interface "<<Interface>> Runnable"{
+}
+Interface "<<Interface>> KeyListener" {
+
+}
+
+Interface "<<Interface>> MouseListener" {
+
+}
+
+Class JFrame{
+}
+
+Class JPanel{
+}
+
+Panneau "1"--"1" Controleur
+Fenetre "1" -- "1" Controleur
+Controleur --|> "<<Interface>> Icontroleur"
+Panneau --|> JPanel
+Panneau --|> "<<Interface>> MouseListener"
+Fenetre --|>JFrame
+Fenetre --|> "<<Interface>> KeyListener"
+Game --|>"<<Interface>> Runnable"
+Statistiques "1" -- "1" Controleur 
+Statistiques "1" -- "1" Fenetre
+Statistiques "1" -- "1" Panneau 
+@enduml

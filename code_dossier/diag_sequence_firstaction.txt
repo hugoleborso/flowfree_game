@@ -1,0 +1,18 @@
+@startuml
+title "Free Flow - Diagramme de Séquence - Première Action"
+actor Utilisateur
+boundary IHM
+Utilisateur -> IHM : clic sur le plot rouge en haut à gauche
+IHM -> Controleur: selectionCase(0,0)
+Controleur -> Plateau : getPlot(0,0)
+Plateau -> "l0c0:Case" : getPlot()
+"l0c0:Case" -->Plateau : p_rouge_1
+Plateau --> Controleur : p_rouge_1
+Controleur -> "p_rouge_1:Plot" : nouveauTuyau()
+"p_rouge_1:Plot" -> "rouge:Couleur" : nouveauTuyau(l0c0)
+"rouge:Couleur" -> "t_rouge:Tuyau" : new Tuyau(l0c0)
+"rouge:Couleur" --> "p_rouge_1:Plot" : t_rouge
+"p_rouge_1:Plot" --> Controleur : t_rouge
+Controleur -> IHM : à l'écoute d'une nouvelle chose à faire 
+Utilisateur <-IHM : Entoure le plot sélectionné
+@enduml

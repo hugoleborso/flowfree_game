@@ -10,7 +10,6 @@ public class Plateau {
 	protected int nbColonnes;
 	protected ArrayList<ArrayList<Case>> plateau;
 	public static int TAILLE;
-	public static int NombreCasesOccupées;
 	
 	public Plateau(int nbLignes, int nbColonnes){//, ArrayList<Position> arrayPositionPlot,ArrayList<Couleur> arrayCouleurs) {
 		

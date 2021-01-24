@@ -142,7 +142,7 @@ public class Niveau {
 	        }
 		}
 		else {
-			niveau = 0;
+			System.exit(0);
 		}
 	}
 

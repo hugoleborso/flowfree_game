@@ -1,0 +1,25 @@
+@startuml
+@startuml
+title "Free Flow - Diagramme de Séquence - Affichage du diagramme"
+actor Utilisateur
+boundary "Partie métier"
+Utilisateur -> Fenetre : Appuie sur une touche ou clique sur un plot
+Fenetre -> "Partie métier" : Notifie la partie métier de l'action
+"Partie métier" -> "Partie métier" : met à jour les tableaux de directions et de plots séléctionnés
+"Partie métier" -> Fenetre : prévient que la partie n'est pas finie
+Fenetre -> Panneau : appel à repaint() 
+Panneau -> Panneau : dessine la grille
+Panneau -> Couleur : getEnumConstants()
+Couleur -> Panneau : renvoie la liste des couleurs
+loop couleur
+Panneau -> Couleur : getDataCouleur()
+Couleur -> Panneau : data
+Panneau -> DataCouleur : getPositionPlots(), getCoordoneesPlotChoisi(), getDirectionsTuyau()
+DataCouleur -> Panneau : positionsPlots, plotChoisi, directionsTuyau
+Panneau -> Panneau : paintDirections() 
+end
+Panneau -> Controleur : getStatistiques()
+Controleur -> Panneau : stats
+Panneau -> Panneau : affiche les scores au dessus de la grille
+Fenetre -> Utilisateur : Affiche le chef-d'oeuvre
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+title "Free Flow - Diagramme de Séquence - Séléction du niveau et affichage de la grille"
+actor Utilisateur
+Utilisateur -> Game: Lance une instance de la classe Game en cliquant sur Run
+Game -> Fenetre : new Fenetre( new Controleur() ) 
+Fenetre -> Controleur : new Controleur()
+Controleur -> Fenetre : controleur
+@startuml
+title "Free Flow - Diagramme de Séquence - Choix du niveau et création du controleur"
+actor Utilisateur
+Utilisateur -> Game: Lance une instance de la classe Game en cliquant sur Run
+Game -> Fenetre : new Fenetre( new Controleur() ) 
+Fenetre -> Controleur : new Controleur()
+Controleur -> Niveau : new Niveau()
+Niveau -> Utilisateur : création d'un JOptionPane pour choisir le niveau
+Utilisateur -> Niveau : séléction du niveau : 5
+Niveau -> Controleur : niveauActuel
+Controleur -> Statistiques : new Statistiques(niveauActuel)
+Statistiques -> Controleur : stats
+Controleur -> Plateau : new Plateau(stats.getNbLignes(),stats.getNbColonnes())
+Plateau -> Statistiques : getNbLignes() & getNbColonnes()
+Statistiques  -> Plateau :5 & 5
+Plateau -> Controleur : plateau
+Controleur -> Fenetre : controleur
+@enduml

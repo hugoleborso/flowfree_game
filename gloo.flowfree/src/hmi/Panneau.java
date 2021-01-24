@@ -267,7 +267,7 @@ public class Panneau extends JPanel implements MouseListener {
         int green = (int) Math.round(Math.min(255, color.getGreen() + 255 * 0.3));
         int blue = (int) Math.round(Math.min(255, color.getBlue() + 255 * 0.3));
 
-        int alpha = (int) Math.round(Math.min(255,color.getAlpha()/4));
+        int alpha = (int) Math.round(Math.min(255,color.getAlpha()/3));
 
         return new Color(red, green, blue, alpha);
 

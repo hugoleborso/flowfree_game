@@ -11,4 +11,4 @@ Runned by Eclipse, the code will enable you to play the game Flowfree, also avai
 Fill the grid by connecting every point of the same color ! 
 
 ## Authors
-Hugo Borsoni and Vincent Flattot, on a work began by our teacher Dominique Marcadet
+Hugo Borsoni and Vincent Flattot, on files coded by our teacher Dominique Marcadet

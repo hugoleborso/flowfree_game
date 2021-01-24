@@ -6,9 +6,9 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import control.Controleur;
 import control.IControleur;
 import enumerations.Direction;
+import game.Statistiques;
 
 /**
  * Fenêtre de l'IHM pour le jeu FlowFree
@@ -20,9 +20,9 @@ import enumerations.Direction;
 @SuppressWarnings( "serial" )
 public class Fenetre extends JFrame implements KeyListener {
 
-    public static final int COTE_FENETRE = 500;
+    private static final int COTE_FENETRE = 500;
     private static final int HAUTEUR_BARRE_FENETRE = 20;
-    static final int HAUTEUR_ZONE_TEXTE = 40;
+    private final static int HAUTEUR_ZONE_TEXTE = 40;
     private IControleur controleur;
 
     public Fenetre( IControleur controleur ) {
@@ -57,11 +57,12 @@ public class Fenetre extends JFrame implements KeyListener {
             repaint();
             String message;
             JOptionPane.showMessageDialog( this, "Vous avez gagné !" );
-            if (Controleur.nbCasesGrille==Controleur.compteurActions){
+            Statistiques stats = controleur.getStatistiques();
+            if (stats.getNbCasesGrille()==stats.getNbActions()){
             	message = "Bravo ! Vous avez réussi avec le nombre d'actions minimum !";
             }
             else {
-            	message = "Bien joué ! Vous avez réussi avec "+ Integer.toString(Controleur.compteurActions)+" actions. Le nombre minimum est "+ Integer.toString(Controleur.nbCasesGrille)+".";
+            	message = "Bien joué ! Vous avez réussi avec "+ Integer.toString(stats.getNbActions())+" actions. Le nombre minimum est "+ Integer.toString(stats.getNbCasesGrille())+".";
             }
 			JOptionPane.showMessageDialog(this, message);
             System.exit( 0 );
@@ -73,5 +74,13 @@ public class Fenetre extends JFrame implements KeyListener {
     public void keyReleased( KeyEvent e ) {
         // nothing
     }
+
+	public static int getHauteurZoneTexte() {
+		return HAUTEUR_ZONE_TEXTE;
+	}
+
+	public static int getTailleCoteFenetre() {
+		return COTE_FENETRE;
+	}
 
 }

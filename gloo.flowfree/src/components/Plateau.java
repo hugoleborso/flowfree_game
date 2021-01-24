@@ -12,7 +12,7 @@ public class Plateau {
 	public static int TAILLE;
 	public static int NombreCasesOccupées;
 	
-	public Plateau(int nbLignes, int nbColonnes, ArrayList<Position> arrayPositionPlot,ArrayList<Couleur> arrayCouleurs) {
+	public Plateau(int nbLignes, int nbColonnes){//, ArrayList<Position> arrayPositionPlot,ArrayList<Couleur> arrayCouleurs) {
 		
 		this.nbLignes = nbLignes;
 		this.nbColonnes = nbColonnes;
@@ -23,18 +23,16 @@ public class Plateau {
 		for (int i = 0; i<nbLignes ; i++) {
 			this.plateau.add(new ArrayList<Case>(nbColonnes));
 			for (int j = 0; j <nbColonnes; j++) {
-				if (arrayPositionPlot.contains(new Position(i,j))) {
-					int positionDansListe = arrayPositionPlot.indexOf(new Position(i,j));
-					this.plateau.get(i).add(new Case(this));
-					
-					//On initialise le plot
-					Case casePourPlot = this.plateau.get(i).get(j);
-					Couleur couleurPlot = arrayCouleurs.get(positionDansListe);
-					casePourPlot.setPlot(new Plot(couleurPlot,casePourPlot));
-				} else {
-					this.plateau.get(i).add(new Case(this));
-				}
+				this.plateau.get(i).add(new Case(this));
 				
+				for( Couleur couleur : Couleur.class.getEnumConstants() ) {
+					if (couleur.getPostionsPlots().contains(new Position(i,j))) {					
+						//On initialise le plot
+						Case casePourPlot = this.plateau.get(i).get(j);
+						Couleur couleurPlot = couleur;
+						casePourPlot.setPlot(new Plot(couleurPlot,casePourPlot));
+					}
+				}
 			}
 		}
 
@@ -128,19 +126,17 @@ public class Plateau {
 		return true;
 	}
 	
-	public Case getCaseAutrePlotByCouleur(Plot plotCourant , ArrayList<Couleur> arrayCouleurs ,  ArrayList<Position> arrayPositionPlot ) {
+	public Case getCaseAutrePlotByCouleur(Plot plotCourant) {
 		Case maCase = plotCourant.getCase();
 		Couleur couleurPlot = plotCourant.getCouleur();
-		
-		for (int k = 0; k<arrayCouleurs.size() ; k++) {
-			if(arrayCouleurs.get(k).getCouleur()==couleurPlot.getCouleur()) {
-				Position positionPossible=arrayPositionPlot.get(k);
-				Case casePotentielle = this.plateau.get(positionPossible.getI()).get(positionPossible.getJ());
-				if (!(casePotentielle==maCase)){
-					return casePotentielle;
-				}
-			}
+		Position positionPossible1 = couleurPlot.getPostionsPlots().get(0);
+		Case casePotentielle1 = this.plateau.get(positionPossible1.getI()).get(positionPossible1.getJ());
+		if (!(casePotentielle1==maCase)){
+			return casePotentielle1;
+		}else {
+			Position positionPossible2 = couleurPlot.getPostionsPlots().get(1);
+			Case casePotentielle2 = this.plateau.get(positionPossible2.getI()).get(positionPossible2.getJ());
+			return casePotentielle2;
 		}
-		return null;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import enumerations.Couleur;
 import enumerations.Direction;
+import game.Statistiques;
 
 /**
  * Interface du controleur pour le jeu Flow 
@@ -118,6 +119,14 @@ public interface IControleur {
      *         position du plot de cette couleur choisi pour démarer le tuyau.
      */
 	int[] getPositionPlotChoisi(Couleur couleur);
+	
+	/**
+	 * Méthode appellée par l'IHM et qui permet à celle-ci d'afficher les statistques voulues en haut de la fenêtre.
+	 * 
+	 * @return un Objet Statistiques 
+	 * @author Hugo Borsoni et Vincent Flattot
+	 */
+	Statistiques getStatistiques();
 
 }
 

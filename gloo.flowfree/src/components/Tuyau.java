@@ -7,12 +7,12 @@ import enumerations.Direction;
 
 public class Tuyau {
 	protected Couleur maCouleur;
-	protected ArrayList<Case> caseTraverseesParTuyau= new ArrayList<>();
+	protected ArrayList<Case> casesTraverseesParTuyau= new ArrayList<>();
 	public boolean isFini = false; 
 	
 	public Tuyau(Couleur maCouleur, Case premiereCase) {
 		this.maCouleur=maCouleur;
-		caseTraverseesParTuyau.add(premiereCase);
+		casesTraverseesParTuyau.add(premiereCase);
 		premiereCase.monTuyau=this;
 	}
 	
@@ -21,7 +21,7 @@ public class Tuyau {
 	}
 	
 	public boolean estDansTuyau(Case laCase) {
-		if (this.caseTraverseesParTuyau.contains(laCase)) {
+		if (this.casesTraverseesParTuyau.contains(laCase)) {
 			return true;
 		}
 		return false ;
@@ -45,10 +45,10 @@ public class Tuyau {
 			return new boolean[]{false,false,false};
 		}
 		else {
-			Case laDerniereCase = (Case) this.caseTraverseesParTuyau.get(this.caseTraverseesParTuyau.size()-1);//on recupere la derniere
+			Case laDerniereCase = (Case) this.casesTraverseesParTuyau.get(this.casesTraverseesParTuyau.size()-1);//on recupere la derniere
 			Case laCaseVoulue = laDerniereCase.getCaseVoisine(direction);
 			if (laCaseVoulue!=null) {
-				boolean[] laCaseAccepteTuyau=laCaseVoulue.accepteTuyau(this);
+				boolean[] laCaseAccepteTuyau = laCaseVoulue.accepteTuyau(this);
 				if(laCaseAccepteTuyau[0]) return new boolean[]{true,false,laCaseAccepteTuyau[1]};
 				return new boolean[]{false,true,false};
 			} else {
@@ -59,12 +59,12 @@ public class Tuyau {
 	
 	public boolean ajouterCase(Case laCase, boolean isPlotOnCase) {
 		if (isPlotOnCase) {
-			this.caseTraverseesParTuyau.add(laCase);
+			this.casesTraverseesParTuyau.add(laCase);
 			setIsFini(true);
 			return true;
 		}
 		else {
-			this.caseTraverseesParTuyau.add(laCase);
+			this.casesTraverseesParTuyau.add(laCase);
 			return false;
 		}
 			
@@ -73,7 +73,7 @@ public class Tuyau {
 	
 	
 	public void deleteTuyauContent() {
-		for ( Case caseDuTuyau : this.caseTraverseesParTuyau) {
+		for ( Case caseDuTuyau : this.casesTraverseesParTuyau) {
 			caseDuTuyau.setTuyau(null);
 		}
 	}
@@ -81,4 +81,7 @@ public class Tuyau {
 	private void setIsFini(boolean isFini) {
 		this.isFini=isFini;
 	}
+	
 }
+
+

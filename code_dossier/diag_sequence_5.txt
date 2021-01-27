@@ -1,0 +1,28 @@
+@startuml
+title "Free Flow - Diagramme de Séquence - Cinquième Action : Rajout tuyau case invalide (car plot vert)"
+actor Utilisateur
+boundary IHM
+Utilisateur -> IHM : Clique sur la flèche de DROITE
+IHM -> Controleur :action(DROITE) 
+Controleur -> "t_rouge:Tuyau" : modifier(DROITE)
+"t_rouge:Tuyau" -> "t_rouge:Tuyau" : récupération de la dernière case du tuyau : l3c0
+"t_rouge:Tuyau" -> "l3c0:Case" :getCaseVoisine(DROITE)
+"l3c0:Case" -> Plateau : getMaCaseVoisine(l3c0,DROITE)
+Plateau --> "t_rouge:Tuyau" :l3c1(Case)
+"t_rouge:Tuyau" -> "l3c1:Case" : accepteTuyau(t_rouge)
+"l3c1:Case" ->"l3c1:Case" : récupération de son plot p_vert
+"l3c1:Case" -> "p_vert:Plot" : accepteTuyau(t_rouge)
+"p_vert:Plot" -> "t_rouge:Tuyau" : getCouleur()
+"t_rouge:Tuyau" -->"p_vert:Plot" :  ROUGE
+"p_vert:Plot" -> "VERT: Couleur" : getCouleur()
+"VERT: Couleur" --> "p_vert:Plot" : VERT
+"p_vert:Plot" --> "l3c1:Case" : false
+"l3c1:Case" ->"t_rouge:Tuyau" :deleteTuyauContent()
+loop [l0c0,l1c0,l2c0,l3c0]
+"t_rouge:Tuyau" -> "CasesduTuyau:Cases" :setTuyau(null)
+end
+"l3c1:Case" -->"t_rouge:Tuyau" :[false,false]
+"t_rouge:Tuyau" --> Controleur :[false,true,false]
+Controleur -> IHM : à l'écoute d'une nouvelle chose à faire 
+IHM ->Utilisateur: suppression du tuyau courant à l'écran
+@enduml

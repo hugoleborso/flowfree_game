@@ -10,7 +10,7 @@ class Plateau
   #nbColonnes : int
   #plateau : ArrayList<ArrayList<Case>>
   +{static} TAILLE: int
-  +Plateau(int nbLignes, int nbColonnes, ArrayList<Position> arrayPositionPlot, arrayList<Couleur> arrayCouleurs)
+  +Plateau(int nbLignes, int nbColonnes)
   +getPlot(int ligne, int colonne): Plot
   +getMaCaseVoisine( Case laCase, Direction direction): Case
   -getPosition(Case laCase): Position

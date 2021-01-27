@@ -45,8 +45,8 @@ class Plot
 class Tuyau
 {
   #maCouleur : Couleur
-  #caseTraverseesParTuyau: ArrayList<Case> = ArrayList()
-  #isFinis : boolean = false
+  #casesTraverseesParTuyau: ArrayList<Case> = ArrayList()
+  #isFini : boolean = false
   +Tuyau(Couleur maCouleur, Case premiereCase)
   +getCouleur() : Couleur
   +estDansTuyau(Case laCase) : boolean
